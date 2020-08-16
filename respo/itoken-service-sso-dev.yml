@@ -1,19 +1,6 @@
-
 spring:
   application:
-    name: itoken-service-admin
-
-
-
-  boot:
-    admin:
-      client:
-        url: http://192.168.1.4:8084
-
-  zipkin:
-    base-url: http://192.168.1.4:9411
-
-
+    name: itoken-service-sso
   datasource:
     druid:
       url: jdbc:mysql://192.168.1.4:3306/itoken-service-admin?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -25,17 +12,37 @@ spring:
       test-on-borrow: true
       driver-class-name: com.mysql.jdbc.Driver
 
+
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8084
+
+  zipkin:
+    base-url: http://localhost:9411
+
+
+
+
 server:
-  port: 8501
+  port: 8503
+
+
+
+feign:
+  hystrix:
+    enabled: true
 
 mybatis:
   type-aliases-package: com.funtl.itoken.common.domain
   mapper-locations: classpath:mapper/*.xml
 
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.4:8761/eureka/,http://192.168.1.4:8861/eureka/,http://192.168.1.4:8961/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
 
 management:
